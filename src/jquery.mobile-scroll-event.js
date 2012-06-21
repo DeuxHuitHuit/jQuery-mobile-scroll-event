@@ -4,3 +4,9 @@
 *	Copyright (c) 2012 Deux Huit Huit (http://www.nitriques.com/open-source/)
 *	Licensed under the MIT (https://raw.github.com/DeuxHuitHuit/jQuery-sprite-animation/master/LICENSE.txt)
 */
+
+(function ($, undefined) {
+	
+	"use strict";
+	
+})(jQuery);

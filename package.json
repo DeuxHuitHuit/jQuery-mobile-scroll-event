@@ -1,0 +1,29 @@
+{
+  "name": "jquery.mobile-scroll-event",
+  "title": "jQuery Mobile Scroll Event",
+  "description": "Patch trying to add \"normal\" scroll events on mobiles devices supporting touch events",
+  "version": "1.0",
+  "homepage": "https://github.com/DeuxHuitHuit/jQuery-mobile-scroll-event",
+  "author": {
+    "name": "Deux Huit Huit",
+    "url": "http://www.deuxhuithuit.com/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/DeuxHuitHuit/jQuery-mobile-scroll-event.git"
+  },
+  "bugs": {
+    "url": "https://github.com/DeuxHuitHuit/jQuery-mobile-scroll-event/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/DeuxHuitHuit/jQuery-mobile-scroll-eventn/blob/master/LICENSE.txt"
+    }
+  ],
+  "dependencies": {
+    "jquery": "~1.7",
+	"grunt": "~0.3.9"
+  },
+  "keywords": []
+}
