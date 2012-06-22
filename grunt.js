@@ -51,7 +51,8 @@ module.exports = function(grunt) {
         lastsemic: true
       },
       globals: {
-        jQuery: true
+        jQuery: true,
+        console: true
       }
     },
     uglify: {},
