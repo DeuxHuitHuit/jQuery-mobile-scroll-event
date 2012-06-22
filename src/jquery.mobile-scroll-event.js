@@ -57,7 +57,7 @@
 		var max = 0, isAuto = false;
 		if ($.isPlainObject(options)) {
 			max = options.max[axis];
-		} else if ($.isNumeric(optios.max)) {
+		} else if ($.isNumeric(options.max)) {
 			max = options.max;
 		}
 		
