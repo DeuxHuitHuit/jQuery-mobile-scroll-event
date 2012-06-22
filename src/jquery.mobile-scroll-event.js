@@ -12,30 +12,109 @@
 	// Declare everything in one block
 	var
 	
+	// name
+	name = 'mobile-scroll-event',
+	
+	// namespace
+	ns = '.' + name,
+	
+	// log/err prefix,
+	prefix = '[' + name + ']',
+	
 	// Default options
 	_defaults = {
-		ua: {
+		ua: { // customize valid platforms. Set to null or false to activate everywhere
 			iphone: /iPhone/g,
 			ipod: /iPod/g,
 			ipad: /iPad/g,
 			ios: /iOs/g
 		},
 		touchElement: 'body',
-		axis: 'y' // x || y || xy
+		doScroll: true,      // if false, only the event will get broadcast
+		axis: 'y',           // x || y || xy
+		max: 'auto',         // auto || value || {x:value, y:value}
+		eventName: 'scroll', // customize to your need
+		
+		debug: true // ONLY VALID IN DEFAULTS
+	},
+	
+	// Instances holder
+	_inst = {},
+	
+	// private functions
+	_log = function (s) {
+		if (!!_defaults.debug && !!window.console && !!console.log) {
+			console.log(prefix + ' ' + s);
+		}
+	},
+	_err = function (s) {
+		if (!!_defaults.debug && !!window.console && !!console.err) {
+			console.err(prefix + ' ' + s);
+		}
+	},
+	
+	_getMaxForAxis(axis, options) {
+		var max = 0, isAuto = false;
+		if ($.isPlainObject(options)) {
+			max = options.max[axis];
+		} else if ($.isNumeric(optios.max)) {
+			max = options.max;
+		}
+		
+		if (max === 'auto') {
+			// handle auto
+		}
+		
+		return max;
+	},
+	
+	_createUID = function () {
+		var S4 = function() {
+			return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
+		};
+		return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
+	},
+	
+	_getElementUID = function (elem) {
+		var data = elem.data();
+		if (!data.uid) {
+			data.uid = _createUID();
+		}
+		return data.uid;
+	},
+	
+	_registerInstance = function(scrollElem, touchElement) {
+		var toucId = _getElementUID(touchElement),
+			elemId = _getElementUID(scrollElem);
+		
+		if ($.isArray(container[toucId])) {
+			container[toucId].push(elemId);
+		} else {
+			container[toucId] = [elemId];
+		}
+	},
+	
+	_tiggerScrollEvent = function (elem, options) {
+		elem.trigger(options.eventName + ns, []);
 	},
 	
 	// Touch event handlers
 	_touchstart = function (e) {
-		
+		var t = $(this);
 	},
 	_touchend = function (e) {
-		
+		var t = $(this);
 	},
-	touchdrag = function (e) {
-		
+	_touchdrag = function (e) {
+		var t = $(this);
 	},
 	
 	_hookOne = function (elem, options) {
+		// register globally
+		_registerInstance(elem, options.touchElement);
+		
+		// hook up touchElement touch events
+		
 		
 	},
 	
@@ -47,6 +126,15 @@
 		
 		// get defaults into options
 		options = $.extend({}, _defaults, options);
+		
+		// insure we are dealing with jquery object
+		options.touchElement = $(options.touchElement);
+		
+		// insure touchElement is a single object
+		if (options.touchElement.length !== 1) {
+			_err('touchElement must be unique. Can not continue.');
+			return this;
+		}
 		
 		// hook each item, one by one
 		return $(this).each(function (index, elem) {
@@ -62,7 +150,12 @@
 		mobilescroll: {
 			defaults: _defaults,
 			_private: {
+				_getMaxForAxis: _getMaxForAxis,
 				
+				_createUID: _createUID,
+				_getElementUID: _getElementUID,
+				
+				_tiggerScrollEvent: _tiggerScrollEvent
 			}
 		}
 	};
