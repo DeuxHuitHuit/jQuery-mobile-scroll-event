@@ -53,7 +53,7 @@
 		}
 	},
 	
-	_getMaxForAxis(axis, options) {
+	_getMaxForAxis = function (axis, options) {
 		var max = 0, isAuto = false;
 		if ($.isPlainObject(options)) {
 			max = options.max[axis];
@@ -87,10 +87,10 @@
 		var toucId = _getElementUID(touchElement),
 			elemId = _getElementUID(scrollElem);
 		
-		if ($.isArray(container[toucId])) {
-			container[toucId].push(elemId);
+		if ($.isArray(_inst[toucId])) {
+			_inst[toucId].push(elemId);
 		} else {
-			container[toucId] = [elemId];
+			_inst[toucId] = [elemId];
 		}
 	},
 	
